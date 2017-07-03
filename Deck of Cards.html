@@ -1,0 +1,118 @@
+<script>
+    class Deck{
+        constructor(){
+            this.load();
+        }
+            load(){
+            this.cards = [];
+            let suits = ["hearts", "spades", "clubs", "diamonds"]
+            for (let i=1; i<14; i++){
+                if (i ==1){
+                    var card = "Ace";
+                    var value = 1;
+                    for (let j = 0; j < 4; j++){
+                        let new_card = {"name": card + " of " + suits[j], "value": value};
+                    this.cards.push(new_card);
+                }
+                }
+                else if (i == 11){
+                    var card = "Jack";
+                    var value = 10;
+                    for (let j = 0; j < 4; j++){
+                    let new_card = {"name": card + " of " + suits[j], "value": value};
+                    this.cards.push(new_card);
+                }
+                }
+                else if (i == 12){
+                    var card = "Queen";
+                    var value = 10;
+                    for (let j = 0; j < 4; j++){
+                        let new_card = {"name": card + " of " + suits[j], "value": value};
+                    this.cards.push(new_card);
+                }
+                }
+                else if (i ==13){
+                    var card = "King";
+                    var value = 10;
+                    for (let j = 0; j < 4; j++){
+                    let new_card = {"name": card + " of "+ suits[j], "value": value};
+                    this.cards.push(new_card);
+                }
+                }
+                else{
+                    var card = i;
+                    var value = i;
+                    for (let j = 0; j < 4; j++){
+                    let new_card = {"name": card + " of "+ suits[j], "value": value};
+                    this.cards.push(new_card);
+                }
+                }
+                }
+            }
+            shuffle(){
+                var m = this.cards.length, t, i;
+                while (m){
+                    i = Math.floor(Math.random() * m--);
+                    t = this.cards[m];
+                    this.cards[m] = this.cards[i];
+                    this.cards[i] = t;
+                }
+                return this;
+            }
+            reset(){
+                this.cards = [];
+                this.load();
+            }
+            deal(){
+                if (this.cards.length == 0){
+                    console.log("All cards have been dealt")
+                }
+                else if (this.cards.length == 1){
+                    console.log("This is the last card in the deck")
+                    return this.cards.pop();
+                }
+                else{
+                    return this.cards.pop();
+                }
+                }
+            }
+
+    class Player{
+        constructor(name){
+            this.hand = [];
+            this.name = name;
+        }
+        draw(deck){
+            let card = deck.deal();
+            this.hand.push(card);
+        }
+        discard(){
+            this.hand.pop();
+        }
+    }
+    my_deck = new Deck();
+    console.log(my_deck.cards[0]);
+    my_deck.shuffle(),
+    console.log(my_deck.cards[0]);
+    my_deck.reset();
+    my_deck.shuffle();
+    console.log(my_deck.cards[0]);
+    player1 = new Player("Mike");
+    console.log(player1.hand);
+    player1.draw(my_deck);
+    player1.draw(my_deck);
+    player1.draw(my_deck);
+    player1.draw(my_deck);
+    player1.draw(my_deck);
+    console.log(player1.hand[0]);
+    console.log(player1.hand[1]);
+    console.log(player1.hand[2]);
+    console.log(player1.hand[3]);
+    console.log(player1.hand[4]);
+    player1.discard();
+    console.log(player1.hand[0]);
+    console.log(player1.hand[1]);
+    console.log(player1.hand[2]);
+    console.log(player1.hand[3]);
+    console.log(player1.hand[4]);
+</script>
