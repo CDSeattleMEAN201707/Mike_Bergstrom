@@ -1,0 +1,56 @@
+<script>
+    var _ = {
+   map: function(data, callback) {
+     //code here;
+     for (let i = 0; i< data.length; i++){
+         data[i] = callback(data[i]);
+     }
+     return data;
+   },
+   reduce: function(data, callback, memo) { 
+     // code here;
+     for (let i=0; i < data.length; i++){
+        memo = callback(memo, data[i]);
+     }
+     return memo;
+   },
+   find: function(data, callback) {   
+     // code here;
+     for (let i = 0 ; i < data.length; i++){
+         if (callback(data[i])){
+             return data[i];
+         }
+     }
+   },
+   filter: function(data, callback) { 
+     // code here;
+     new_array = [];
+     for (let i=0; i< data.length; i++){
+         if (callback(data[i])){
+             new_array.push(data[i]);
+         }
+     }
+    return new_array;
+   },
+   reject: function(data, callback) { 
+     // code here;
+     new_array = [];
+     for (let i =0; i < data.length; i++){
+         if (!callback(data[i])){
+             new_array.push(data[i]);
+         }
+     }
+     return new_array;
+   }
+ }
+var mapped = _.map([1,2,3,4], function(num){return num * 3});
+console.log(mapped);
+var reduced = _.reduce([1,2,3,4], function(memo,num){return memo + num}, 0);
+console.log(reduced);
+var found = _.find([1,2,3,4], function(num){return num % 2 == 0;});
+console.log(found);
+var evens = _.filter([1, 2, 3, 4, 5, 6], function(num){ return num % 2 == 0; });
+console.log(evens);
+var odds = _.reject([1,2,3,4,5,6,7,8,9,10], function(num){return num % 2 == 0;});
+console.log(odds);
+</script>
