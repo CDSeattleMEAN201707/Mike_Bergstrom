@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+    <h1>Welcome to the Great Number Game!</h1>
+    <h3>I am thinking of a number between 1 and 100</h3>
+    <h3>Take a guess!</h3>
+    <% if (status == "high") { %>
+    <div style="background-color:red; width:300px; height:300px;">
+        <h1>Too High!</h1>
+        <form action="guess" method="post">
+            <input type="text" name="guess">
+            <input type="submit" value="submit">
+        </form>
+    <% } %>
+    <% if (status == "low") { %>
+    <div style="background-color:red; width:300px;height:300px">
+        <h1>Too Low!</h1>
+        <form action="guess" method="post">
+            <input type="text" name="guess">
+            <input type="submit" value="submit">
+        </form>
+    <% } %>
+    <% if (status == "right") { %>
+    <div style="background-color:green; width:300px; height:300px;">
+        <h1>Correct!</h1>
+        <form action="/" method="get">
+            <input type="submit" value="Play Again!">
+        </form>
+    <% } %>  
+</body>
