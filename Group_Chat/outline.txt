@@ -1,0 +1,8 @@
+1. render index
+
+2. ask for user name, emit to server
+
+3. server listen and store user, broadcast chat info to new user
+
+4. listen for new chats, broadcast to users
+

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Group Chat</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type ="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script type ="text/javascript">
+        $(document). ready(function (){
+            var socket = io. connect();
+            var name = prompt("What is your name?");
+            socket. emit("new_user", {name:name});
+            $('button').click(function(){
+                console.log("message submitted");
+                socket. emit("new_message", {name: name, chat:$('#chat').val()});
+            });
+            socket. on('chat_update', function(data){
+                console.log("chat updated");
+                let html_str = "";
+                for (let i = 0; i< data.chats.length; i++){
+                    html_str += "<p>" + data.chats[i].name+ ": " + data.chats[i].message + "<p>";
+                }
+                $('#chatBoard').html(html_str);
+            });
+            socket. on('server_response', function(data){
+                let html_str = "";
+                for (let i = 0; i< data.chats.length; i++){
+                    html_str += "<p>" + data.chats[i].name+ ": " + data.chats[i].message + "<p>";
+                }
+                $('#chatBoard').html(html_str);
+            });
+        })
+    </script>
+</head>
+<body>
+    <h4>Conversation Board</h4>
+    <div id="chatBoard" style="height: 400px; width:500px; border: 2px solid black">
+    </div>
+    <input id="chat" placeholder="Enter your message here">
+    <button>Send</button>
+</body>
