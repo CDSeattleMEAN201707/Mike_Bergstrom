@@ -26,6 +26,9 @@
         <input type="submit" value="Register">
     </form>
     <a href='/'>Login</a>
+    <% if (passMatch == true){ %>
+        <p>** Passwords do not match ** %>
+    <% } %>
     <% if (errors) { %>
         <% if (errors['name'] == 'MongoError') { %>
         <p>** Email is already registered **</p>

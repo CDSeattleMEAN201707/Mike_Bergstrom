@@ -4,26 +4,33 @@ var bcrypt = require('bcrypt');
 
 module.exports = {
     register: function(req,res){
-        console.log ("in contol register");
+        console.log ("in control register");
         console.log(req.body);
-        if (req.body.password != req.body.confirm){
-
-            res.render('register', {errors: {errors:{User:{message: "Passwords do not match"}}}, input: req.body});
-        } else {
-            console.log("in control else");
-            var newUser = new User({
+        var newUser = new User({
                 email: req.body.email,
                 first_name: req.body.first_name,
                 last_name: req.body.last_name,
                 password: req.body.password,
                 birthday: req.body.birthday,
             })
+        if (req.body.password != req.body.confirm){
+            newUser.validate(function(err){
+                if (err){
+                    console.log(err, "in password mismatch")
+                    res.render('register', {errors: err, passMatch: true})
+                } else {
+                    res.render('register', {passMatch: true, errors: ""});
+
+                }
+            })
+        } else {
+            console.log("in control else");
             console.log(newUser);
             newUser.save(function(err, user){
                 if(err){
                     console.log("save error", err);
                     console.log(err['name'])
-                    res.render('register', {errors: err, input:req.body})
+                    res.render('register', {errors: err, passMatch:false})
                 } else {
                     console.log("register success")
                     req.session.id = user.id;

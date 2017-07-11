@@ -3,7 +3,7 @@ module.exports = function(app){
     // Render the login page at root route *********************************
     app.get('/', function(req,res){
         console.log(req.session.id);
-        res.render('index', {errors:""})
+        res.render('index', {errors:"", passMatch:""})
     })
     // Post login information for validation*******************************
     app.post('/login', function(req,res){
