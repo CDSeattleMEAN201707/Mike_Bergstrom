@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Registration</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+    <header style="border-bottom: 2px solid black;">
+        <h2> Registration </h2>
+    </header>
+    <form action="/register" method="post">
+        <label>Email:</label>
+        <input type="text" name="email"><br>
+        <label>First Name:</label>
+        <input type="text" name="first_name"><br>
+        <label>Last Name:</label>
+        <input type="text" name="last_name"><br>
+        <label>Birthday:</label>
+        <input type="date" name="birthday"><br>
+        <label>Password:</label>
+        <input type="password" name="password"><br>
+        <label>Confirm Password</label>
+        <input type="password" name="confirm"><br>
+        <input type="submit" value="Register">
+    </form>
+    <a href='/'>Login</a>
+    <% if (errors) { %>
+        <% if (errors['name'] == 'MongoError') { %>
+        <p>** Email is already registered **</p>
+        <% } %>
+        <% for (let error in errors['errors']) { %>
+                <p>** <%= errors['errors'][error]['message'] %> **</p>
+        <% } %>
+    <% } %>
+</body>
+</html>
